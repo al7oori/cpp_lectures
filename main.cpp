@@ -9,6 +9,7 @@
 constexpr auto MAX_ITEMS      = 30;
 constexpr auto MAX_MODEL_NAME = 64;     
 
+//enumeration class to list the items that the shop is selling
 
 enum class Product
 {
@@ -23,10 +24,10 @@ enum class Product
         dairyproducts,
         bottls,
         shampoo,
-        Count
+        Count //to check how many items are stored 
 };
 
-/// @brief Holds the names of the product categories.
+/// stores the names of the items. //(CA, 3.4.2022)https://github.com/c2akula/cpp_lectures/blob/4add58c6acc595b622de7311fa8f60b44193d46e/main.cpp
 constexpr std::string_view PRODUCT_NAMES[static_cast<int>(Product::Count)] = {
     [static_cast<int>(Product::vegetables)]         = "vegetables",
     [static_cast<int>(Product::fruit)]      = "fruit",
@@ -62,7 +63,7 @@ auto list_products()
         std::printf("---------------\n");
 }
 
-/// Represents a stocked item corresponding to one of the listed product categories.
+//// defining a struct for item and include properties in it
 struct Item
 {
         Product     id; 
@@ -79,7 +80,7 @@ struct Item
         {}
 };
 
-/// Holds the inventory of all the stocked items in the store.
+
 struct Inventory
 {
         using SearchPredicate = std::function<bool(const Item&)>;
@@ -118,7 +119,7 @@ struct Inventory
         }
 };
 
-struct InventoryUI
+struct InventoryUI //to create the interface for the user to interact with 
 {
         enum class Option
         {
