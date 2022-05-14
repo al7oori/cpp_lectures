@@ -67,15 +67,15 @@ auto list_products()
 struct Item
 {
         Product     id; 
-        std:: string name;     // name of the item
-        int BestBeforeDate;          // date of expiry
-        float       price;         // price of the product stored
-        std:: string type;     // type of the product stored
+        std::string name;  // name of the item
+        std::string BestBeforeDate;  // date of expiry
+        float       price;  // price of the product stored
+        std::string type;   // type of the product stored
         int         nstock;
 
         Item() = default;
 
-        Item(const Product prod, const std::string& name, const float price, const int nstock, int BestBeforeDate, std:: string& type) :
+        Item(const Product prod, const std::string& name, const float price, const int nstock, const std::string& BestBeforeDate, std:: string& type) :
                id {prod}, name {name}, BestBeforeDate {BestBeforeDate}, price {price}, type {type}, nstock {nstock}
         {}
 };
@@ -91,10 +91,10 @@ struct Inventory
 
         Inventory() { items.reserve(MAX_ITEMS); }
 
-        /// @brief Adds the given item to the inventory.
+        // add item to the inventory.
         auto add(const Item& item) { items.emplace_back(item); }
 
-        /// @brief Deletes the given item from the inventory.
+        // delete item from the inventory.
         auto remove(ItemPtr pitem) { items.erase(pitem); }
 
         /// @brief Look for the item for which the given predicate returns true.
@@ -107,16 +107,17 @@ struct Inventory
 
                 return {};
         }
-
         /// @brief Prints a table listing currently stocked items in the inventory.
         auto list()
         {
-                std::printf("%32s%64s%16s%8s\n", "name", "type of item", "Price (GBP)");
+                std::printf("%32s%64s%16s\n","name","type of item","Price (GBP)");
                 std::for_each(items.begin(), items.end(), [](const auto& item) {
-                        std::printf("%32s%64s%16.2f%8d\n", get_product_name(item.id).data(), item.name.c_str(), item.price, item.BestBeforeDate);
+                std::printf("%32s%64s%16.2f%12d\n", get_product_name(item.id).data(), item.name.c_str(), item.price, item.nstock);
                 });
                 std::printf("---------------\n");
         }
+
+       
 };
 
 struct InventoryUI //to create the interface for the user to interact with 
@@ -149,7 +150,7 @@ struct InventoryUI //to create the interface for the user to interact with
         auto get_user_action()
         {
                 char opt {};
-                std::printf("Select operation: ");
+                std::printf("please select an operation to perform: ");
                 std::scanf(" %c", &opt);
                 return opt;
         }
@@ -177,6 +178,7 @@ struct InventoryUI //to create the interface for the user to interact with
 
                                 std::printf("please enter item quantity: ");
                                 std::cin >> item.nstock;
+
 
                                 return item;
                         }
