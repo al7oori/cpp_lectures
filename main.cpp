@@ -161,21 +161,21 @@ struct InventoryUI //to create the interface for the user to interact with
                 do {
                         list_products();
 
-                        std::printf("Select product category to add: ");
+                        std::printf("choose the type of the item you want to add: ");
                         int pid {};
                         std::scanf("%d", &item.id);
 
-                        if (!is_valid_product(item.id)) { std::printf("Invalid option selected. Please try again.\n"); }
+                        if (!is_valid_product(item.id)) { std::printf("somthing went wrong, please try again.\n"); }
                         else
                         {
-                                // NOTE(CA, 28.03.2022) - Important to note that we need to consume the whitespaces from user input when using getline
-                                std::printf("Enter model name: ");
+                                // NOTE(CA, 28.03.2022) 
+                                std::printf("please enter item name: ");
                                 std::getline(std::cin >> std::ws, item.name);
 
-                                std::printf("Enter price: ");
+                                std::printf("please enter item price: ");
                                 std::cin >> item.price;
 
-                                std::printf("Enter quantity: ");
+                                std::printf("please enter item quantity: ");
                                 std::cin >> item.nstock;
 
                                 return item;
