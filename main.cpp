@@ -27,7 +27,7 @@ enum class Product
         Count //to check how many items are stored 
 };
 
-/// stores the names of the items. //(CA, 3.4.2022)https://github.com/c2akula/cpp_lectures/blob/4add58c6acc595b622de7311fa8f60b44193d46e/main.cpp
+// stores the names of the items. //(CA, 3.4.2022)https://github.com/c2akula/cpp_lectures/blob/4add58c6acc595b622de7311fa8f60b44193d46e/main.cpp
 constexpr std::string_view PRODUCT_NAMES[static_cast<int>(Product::Count)] = {
     [static_cast<int>(Product::vegetables)]         = "vegetables",
     [static_cast<int>(Product::fruit)]      = "fruit",
@@ -41,10 +41,10 @@ constexpr std::string_view PRODUCT_NAMES[static_cast<int>(Product::Count)] = {
     [static_cast<int>(Product::shampoo)] = "shampoo",
 };
 
-/// @brief Checks if the given product is valid.
+
 constexpr auto is_valid_product(Product prod) { return prod > Product::Invalid && prod < Product::Count; }
 
-/// @brief Return the name of the given product.
+
 constexpr auto get_product_name(Product prod)
 {
         if (!is_valid_product(prod)) { return std::string_view {""}; }
@@ -52,7 +52,7 @@ constexpr auto get_product_name(Product prod)
         return PRODUCT_NAMES[static_cast<int>(prod)];
 }
 
-/// @brief Prints a list of all the product categories available.
+// shows a list of types available.
 auto list_products()
 {
         std::cout << "Product list: \n";
@@ -66,12 +66,12 @@ auto list_products()
 //// defining a struct for item and include properties in it
 struct Item
 {
-        Product     id; 
+        Product     id; // item id
         std::string name;  // name of the item
         std::string BestBeforeDate;  // date of expiry
         float       price;  // price of the product stored
         std::string type;   // type of the product stored
-        int         nstock;
+        int         nstock; //quantity of the chosen item
 
         Item() = default;
 
