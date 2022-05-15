@@ -246,7 +246,7 @@ struct InventoryUI //to create the interface for the user to interact with
 
         auto run()
         {
-                std::printf(" welcome to the Shop Inventory, please choose the number of the operation you want: v0.1\n");
+                std::printf(" welcome to the Shop Inventory, please choose the number of the operation you want:\n");
 
                 do {
                         list_options();
