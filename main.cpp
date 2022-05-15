@@ -169,7 +169,7 @@ struct InventoryUI //to create the interface for the user to interact with
                         if (!is_valid_product(item.id)) { std::printf("somthing went wrong, please try again.\n"); }
                         else
                         {
-                                // NOTE(CA, 28.03.2022) 
+
                                 std::printf("please enter item name: ");
                                 std::getline(std::cin >> std::ws, item.name);
 
@@ -186,11 +186,11 @@ struct InventoryUI //to create the interface for the user to interact with
                 } while (true);
         }
 
-        /// @brief Search item by name or product category to perform remove or edit operations on the found item.
+        /// @brief Search item by name or type to perform remove or edit operations on the found item.
         auto handle_search_option()
         {
                 char opt {};
-                std::printf("Search by (n) Name, (p) Product Category: ");
+                std::printf("Search by (n) Name, (t) type: ");
                 std::cin >> opt;
 
                 Inventory::ItemPtr pitem;
@@ -199,30 +199,28 @@ struct InventoryUI //to create the interface for the user to interact with
                 {
                         // search for item by name
                         std::string name {};
-                        std::printf("Enter model name: ");
+                        std::printf("please enter item name name: ");
                         std::getline(std::cin >> std::ws, name);
                         pitem = inventory.search([&](const Item& item) { return item.name == name; });
                 }
-                else if (opt == 'p')
+                else if (opt == 't')
                 {
-                        // search for item by product id
-                        Product prod {Product::Invalid};
-                        list_products();
-                        std::printf("Select product id: ");
-                        std::scanf("%d", &prod);
-
-                        pitem = inventory.search([&](const Item& item) { return item.id == prod; });
-                }
+                        // search for item by type
+                        std::string type {};
+                        std::printf("please enter item type: ");
+                        std::getline(std::cin >> std::ws, type);
+                        pitem = inventory.search([&](const Item& item) { return item.type == type; });
+                }        
                 else
                 {
                         std::printf("Invalid option selected. Please try again.\n");
                         return;
                 }
 
-                // if item was found
+                // if the item does exist
                 if (pitem != Inventory::ItemPtr {})
                 {
-                        // we ask the user what they'd like to do with this found item
+                        // operations to perform in the found item
                         do {
                                 std::printf("(%c) Remove Item\n", static_cast<char>(Option::RemoveItem));
                                 std::printf("(%c) Edit Item\n", static_cast<char>(Option::EditItem));
@@ -236,8 +234,7 @@ struct InventoryUI //to create the interface for the user to interact with
                                 }
                                 else if (opt == static_cast<char>(Option::EditItem))
                                 {
-                                        // NOTE(CA, 28.03.2022) - This is cumbersome to use and also inefficient. You should swap in-place or
-                                        // just edit a property of interest but that'd be more complicated.
+
                                         const auto new_item = handle_add_option();
                                         inventory.remove(pitem);
                                         inventory.add(new_item);
@@ -247,7 +244,7 @@ struct InventoryUI //to create the interface for the user to interact with
                                 else { std::printf("Invalid option selected. Please try again.\n"); }
                         } while (true);
                 }
-                else { std::printf("Item not found. Try adding an item.\n"); }
+                else { std::printf("this item does not exist.\n"); }
         }
 
         auto run()
