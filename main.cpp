@@ -139,7 +139,7 @@ struct InventoryUI //to create the interface for the user to interact with
         {
                 std::printf("(%c) Add Item\n", static_cast<char>(Option::AddItem));
                 std::printf("(%c) Search Item\n", static_cast<char>(Option::SearchItem));
-                std::printf("(%c) List Product Categories\n", static_cast<char>(Option::ListProducts));
+                std::printf("(%c) List item types\n", static_cast<char>(Option::ListProducts));
                 std::printf("(%c) List Items in Stock\n", static_cast<char>(Option::ListItems));
                 std::printf("(%c) Quit\n", static_cast<char>(Option::Quit));
         }
