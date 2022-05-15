@@ -152,7 +152,7 @@ struct InventoryUI //to create the interface for the user to interact with
                 return opt;
         }
 
-        /// @brief Adds item to the inventory.
+        // to add an item.
         auto handle_add_option()
         {
                 Item item;
