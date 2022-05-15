@@ -183,7 +183,7 @@ struct InventoryUI //to create the interface for the user to interact with
                 } while (true);
         }
 
-        //Search item by name or type to perform remove or edit operations on the found item.
+        //Search item by name or type.
         auto handle_search_option()
         {
                 char opt {};
