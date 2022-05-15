@@ -63,7 +63,7 @@ auto list_products()
         std::printf("---------------\n");
 }
 
-//// defining a struct for item and include properties in it
+// defining a struct for item and include properties in it
 struct Item
 {
         Product     id; // item id
@@ -85,7 +85,7 @@ struct Inventory
 {
         using SearchPredicate = std::function<bool(const Item&)>;
         using Items           = std::vector<Item>;
-        using ItemPtr         = Items::iterator;        // pointer to item type
+        using ItemPtr         = Items::iterator;     
 
         Items items;
 
@@ -97,9 +97,6 @@ struct Inventory
         // delete item from the inventory.
         auto remove(ItemPtr pitem) { items.erase(pitem); }
 
-        /// @brief Look for the item for which the given predicate returns true.
-        ///
-        /// @returns nullptr if item is not found else pointer to item.
         auto search(const SearchPredicate& pred) -> ItemPtr
         {
                 auto pitem = std::find_if(items.begin(), items.end(), pred);
@@ -107,7 +104,7 @@ struct Inventory
 
                 return {};
         }
-        /// @brief Prints a table listing currently stocked items in the inventory.
+        // shows items that are already exist.
         auto list()
         {
                 std::printf("%32s%64s%16s\n","name","type of item","Price (GBP)");
